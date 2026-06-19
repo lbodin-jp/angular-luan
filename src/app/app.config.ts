@@ -32,10 +32,12 @@ import {
   provideLuUserPopover,
   USER_POPOVER_IS_ACTIVATED,
 } from '@lucca-front/ng/user-popover';
+import { provideLuccaSitemap } from '@lucca/ngx-sitemap';
 
 import { of } from 'rxjs';
 
 import { routes } from './app.routes';
+import { AppSitemapNodeProvider } from './sitemap-node.provider';
 
 // Locales loaded by the Lucca Front components (dates, numbers, currencies).
 [localeDe, localeEn, localeEs, localeFr, localeIt, localeNl, localePt].forEach(
@@ -68,5 +70,11 @@ export const appConfig: ApplicationConfig = {
     { provide: USER_POPOVER_IS_ACTIVATED, useValue: of(true) },
     // TODO: wire to your real authenticated user id (e.g. a principal service).
     provideCoreSelectCurrentUserId(() => 0),
+
+    // Quick local menu: Accueil / Récent / Favoris (see AppSitemapNodeProvider).
+    provideLuccaSitemap({
+      icons: {},
+      nodesProvider: { useExisting: AppSitemapNodeProvider },
+    }),
   ],
 };
