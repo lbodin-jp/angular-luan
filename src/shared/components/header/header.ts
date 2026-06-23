@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PageHeaderComponent } from '@lucca-front/ng/page-header';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [PageHeaderComponent],
+  imports: [ButtonComponent, IconComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {}
-

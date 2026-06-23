@@ -1,1 +1,23 @@
-<lu-page-header label="Accueil"></lu-page-header>
+<div class="library">
+  <lu-filter-bar class="library__filter-bar">
+    <ng-template luFilterPillAddonBefore>
+      <lu-form-field label="Recherche" [hiddenLabel]="true" class="library__search">
+        <lu-text-input [hasSearchIcon]="true" [(ngModel)]="search" />
+      </lu-form-field>
+    </ng-template>
+
+    <lu-filter-pill label="Label">
+      <lu-simple-select [options]="labels" [(ngModel)]="selectedLabel" />
+    </lu-filter-pill>
+
+    <ng-template luFilterPillAddonAfter>
+      <a class="library__apply">Apply filters</a>
+    </ng-template>
+  </lu-filter-bar>
+
+  <div class="library__carousels">
+    @for (row of rows; track row.label) {
+      <app-carousel [label]="row.label" [cardCount]="row.cardCount" />
+    }
+  </div>
+</div>

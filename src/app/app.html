@@ -1,19 +1,12 @@
-<!-- <app-header />
-<lucca-sitemap></lucca-sitemap>
-<router-outlet />
-<app-footer /> -->
-
-
 <lu-app-layout>
-<ng-container appLayoutBanner>
-<lu-skip-links />
-<!-- <lucca-banner></lucca-banner> -->
-</ng-container>
+  <ng-container appLayoutBanner>
+    <lu-skip-links />
+    <app-header />
+  </ng-container>
 
-<ng-container appLayoutNavSide>
-<lucca-sitemap />
-</ng-container>
+  <ng-container appLayoutNavSide>
+    <lucca-sitemap />
+  </ng-container>
 
-<!-- <lu-toasts [sources]="[]" /> -->
-<router-outlet />
+  <router-outlet />
 </lu-app-layout>

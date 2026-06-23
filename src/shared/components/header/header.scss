@@ -1,3 +1,82 @@
 :host {
   display: block;
 }
+
+.topbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 16px;
+  background: #fff;
+  border-bottom: 1px solid #e6e8ef;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: #ff5d2b;
+    font-size: 16px;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1b2559;
+  }
+
+  &__title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1b2559;
+    white-space: nowrap;
+  }
+
+  &__actions {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+  }
+
+  &__add {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1b2559;
+    cursor: pointer;
+  }
+
+  &__add-icon {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #f2b705;
+    border: 2px solid #1b2559;
+  }
+}

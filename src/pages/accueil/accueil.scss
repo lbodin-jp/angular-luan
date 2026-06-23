@@ -1,3 +1,60 @@
 :host {
   display: block;
 }
+
+.library {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+
+  &__filter-bar {
+    display: block;
+    width: 100%;
+
+    // Force the filter-bar inner scroll-box to a full-width flex row so the
+    // search field (addon-before slot) can stretch.
+    ::ng-deep lu-scroll-box,
+    ::ng-deep .filterBar,
+    ::ng-deep .scrollBox {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  // The search field sits in the filter-bar "addon before" slot: let it grow
+  // to fill all the horizontal space left by the pills / apply link.
+  &__search {
+    flex: 1;
+    min-width: 0;
+
+    // The form-field and the lu-text-input chain default to an auto/content
+    // width — force every level to span the full available column.
+    ::ng-deep {
+      .form-field,
+      lu-text-input,
+      .textField,
+      .textField-input {
+        width: 100%;
+      }
+    }
+  }
+
+  &__apply {
+    color: #2f6df6;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  // The content area sits to the right of the 176px sidebar, so anything
+  // centered inside it lands right of the (full-width, viewport-centered)
+  // header title. Shift the carousels left by half the sidebar width so their
+  // center lines up with the header.
+  &__carousels {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    transform: translateX(-88px);
+  }
+}

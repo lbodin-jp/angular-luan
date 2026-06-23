@@ -1,4 +1,8 @@
 /* Lucca Front design system — commons (variables, reset, utilities) + components. */
 @use '@lucca-front/scss/src/main-all' as *;
 
+/* Lucca icon font (loads "Lucca icons" @font-face from the Lucca CDN) — needed
+   for component icons such as the search magnifying glass on lu-text-input. */
+@import '@lucca-front/icons/dist/lucca-icons.min.css';
+
 /* Add global styles below. */
