@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Genre, Jeu } from '../accueil';
 
 @Component({
   selector: 'app-carousel',
@@ -8,9 +9,7 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 })
 export class Carousel {
   readonly label = input.required<string>();
-  readonly cardCount = input.required<number>();
+  readonly jeux = input.required<Jeu[]>(); 
 
-  protected readonly cards = computed(() =>
-    Array.from({ length: this.cardCount() }),
-  );
+ 
 }
