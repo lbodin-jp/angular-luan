@@ -11,21 +11,17 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Carousel } from './carousel/carousel';
 import { AccueilService } from './accueil-service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
+import { Jeu } from '../../shared/components/carte-jeu/jeu-model';
 
-export const GENRE = ['Open World', 'Platformer', 'RPG', 'action-aventure'];
+export const GENRE = ['Open World', 'Platformer', 'RPG', 'action-aventure', "Jeux de puzzle"];
 export type Genre = keyof typeof GENRE;
 
-export type Jeu = {
-    id: number,
-    titre: string,
-    plateforme: string,
-    note: number,
-    termine: boolean,
-    favoris: boolean,
-    derniere_recherche: string,
-    genre: Genre,
+
+  export type JeuxParGenre = {
+    genre: string,
+    jeux: Jeu[],
   }
 
 @Component({
@@ -49,10 +45,11 @@ export type Jeu = {
 export class Accueil implements OnInit {
   protected search = '';
   protected selectedLabel: string | null = null;
-  protected readonly labels = ['Open World', 'Platformer', 'RPG'];
+  protected readonly genres = GENRE;
   private readonly accueilService = inject(AccueilService);
   protected jeux$: Observable<Jeu[]> | null = null;
-  private test?: Genre;
+  protected jeuxParGenre$: Observable<JeuxParGenre[]> | null = null;
+  
 
   protected readonly rows = [
     { label: 'Open World', cardCount: 5 },
@@ -62,6 +59,20 @@ export class Accueil implements OnInit {
 
   ngOnInit() {
     this.jeux$ = this.accueilService.getAllGames();
+    this.jeuxParGenre$ = this.jeux$.pipe(
+      map((jeux) => {
+        const jeuxParGenre: JeuxParGenre[] = [];
+        for (const genre of this.genres) {
+          jeuxParGenre.push({
+            genre: genre,
+            jeux: jeux.filter((jeu) => jeu.genre === genre.toLowerCase()),
+          });
+        }
+        return jeuxParGenre;
+      })
+    )
     console.log(this.jeux$);
   }
 }
+
+

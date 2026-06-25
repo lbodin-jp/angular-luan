@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { Jeu } from './accueil';
+import { Jeu } from '../../shared/components/carte-jeu/jeu-model';
+
 
 @Injectable({
   providedIn: 'root',

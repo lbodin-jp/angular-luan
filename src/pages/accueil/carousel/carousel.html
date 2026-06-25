@@ -1,17 +1,17 @@
 <section class="carousel">
   <div class="carousel__label">{{ label() }}</div>
   <div class="carousel__track">
-    @for (jeu of jeux(); track jeu.id) {
-      <div class="carousel__card">
-        <!-- <img [src]="jeu.image" [alt]="jeu.name" /> -->
-        <p>{{ jeu.titre }}</p>
-        <p>{{ jeu.genre }}</p>
-        <p>{{ jeu.plateforme }}</p>
-        <p>{{ jeu.favoris }}</p>
-        <p>{{ jeu.note }}/20</p>
-        <p>{{ jeu.termine }}</p>
-      </div>
+    @for (jeu of jeux(); let dernierJeu = $last; track jeu.id) {
+     <app-carte-jeu [jeu]="jeu" />
+     @if (dernierJeu) {
+      <button type="button" class="carousel__next">›</button>
     }
-    <button type="button" class="carousel__next">›</button>
+      
+    }
+   
+    @empty {
+      <p class="carousel__empty">Aucun jeu trouvé pour ce genre.</p>
+    }
+    
   </div>
 </section>

@@ -7,7 +7,7 @@
     </ng-template>
 
     <lu-filter-pill label="Label">
-      <lu-simple-select [options]="labels" [(ngModel)]="selectedLabel" />
+      <lu-simple-select [options]="genres" [(ngModel)]="selectedLabel" />
     </lu-filter-pill>
 
     <ng-template luFilterPillAddonAfter>
@@ -16,8 +16,10 @@
   </lu-filter-bar>
 
   <div class="library__carousels">
-    @if (jeux$ | async; as jeux) {
-        <app-carousel [label]="'Open World'" [jeux]="jeux" />
+    @if (jeuxParGenre$ | async; as jeuxParGenre) {
+      @for (item of jeuxParGenre; track item.genre) {
+        <app-carousel [label]="item.genre" [jeux]="item.jeux" />
+      }
     }
   </div>
 
