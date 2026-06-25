@@ -6,12 +6,17 @@
       </lu-form-field>
     </ng-template>
 
-    <lu-filter-pill label="Label">
+    <lu-filter-pill label="Genre">
       <lu-simple-select [options]="genres" [(ngModel)]="selectedLabel" />
     </lu-filter-pill>
 
     <ng-template luFilterPillAddonAfter>
-      <a class="library__apply">Apply filters</a>
+      <button type="button" class="library__reset" (click)="resetFilters()">Retour au menu de base</button>
+      <button type="button" class="library__apply" (click)="applyFilters()">Apply filters</button>
+    </ng-template>
+
+    <ng-template luFilterPillAddonAfter>
+      <button type="button" class="library__apply" (click)="applyFilters()">Apply filters</button>
     </ng-template>
   </lu-filter-bar>
 

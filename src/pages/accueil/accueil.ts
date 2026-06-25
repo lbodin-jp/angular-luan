@@ -11,12 +11,12 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Carousel } from './carousel/carousel';
 import { AccueilService } from './accueil-service';
-import { map, Observable } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 import { Jeu } from '../../shared/components/carte-jeu/jeu-model';
 
-export const GENRE = ['Open World', 'Platformer', 'RPG', 'action-aventure', "Jeux de puzzle"];
-export type Genre = keyof typeof GENRE;
+export const GENRE = ['Open World', 'Platformer', 'RPG', 'action-aventure', "Jeux de puzzle"] as const;
+export type Genre = (typeof GENRE)[number];
 
 
   export type JeuxParGenre = {
@@ -45,8 +45,11 @@ export type Genre = keyof typeof GENRE;
 export class Accueil implements OnInit {
   protected search = '';
   protected selectedLabel: string | null = null;
-  protected readonly genres = GENRE;
+  protected readonly genres = [...GENRE].sort((a, b) =>
+    a.localeCompare(b, 'fr', { sensitivity: 'base' })
+  );
   private readonly accueilService = inject(AccueilService);
+  private readonly appliedGenre$ = new BehaviorSubject<string | null>(null);
   protected jeux$: Observable<Jeu[]> | null = null;
   protected jeuxParGenre$: Observable<JeuxParGenre[]> | null = null;
   
@@ -59,19 +62,31 @@ export class Accueil implements OnInit {
 
   ngOnInit() {
     this.jeux$ = this.accueilService.getAllGames();
-    this.jeuxParGenre$ = this.jeux$.pipe(
-      map((jeux) => {
-        const jeuxParGenre: JeuxParGenre[] = [];
-        for (const genre of this.genres) {
-          jeuxParGenre.push({
-            genre: genre,
-            jeux: jeux.filter((jeu) => jeu.genre === genre.toLowerCase()),
-          });
-        }
-        return jeuxParGenre;
+
+    this.jeuxParGenre$ = combineLatest([
+      this.jeux$,
+      this.appliedGenre$,
+    ]).pipe(
+      map(([jeux, genreSelectionne]) => {
+        const genres = genreSelectionne
+          ? [genreSelectionne]
+          : this.genres;
+
+        return genres.map((genre) => ({
+          genre,
+          jeux: jeux.filter((jeu) => jeu.genre.toLowerCase() === genre.toLowerCase()),
+        }));
       })
-    )
-    console.log(this.jeux$);
+    );
+  }
+
+  protected applyFilters(): void {
+    this.appliedGenre$.next(this.selectedLabel);
+  }
+
+  protected resetFilters(): void {
+    this.selectedLabel = null;
+    this.appliedGenre$.next(null);
   }
 }
 
