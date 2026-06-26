@@ -1,1 +1,15 @@
 <lu-page-header label="Récent"></lu-page-header>
+
+<div class="recent">
+  @if (recentJeux$ | async; as recentJeux) {
+    @if (recentJeux.length > 0) {
+      <div class="recent__grid">
+        @for (jeu of recentJeux; track jeu.id) {
+          <app-carte-jeu [jeu]="jeu" />
+        }
+      </div>
+    } @else {
+      <p class="recent__empty">Aucun jeu récent pour le moment.</p>
+    }
+  }
+</div>

@@ -6,10 +6,13 @@
   display: flex;
   flex-direction: column;
   gap: 26px;
+  padding-inline: 18px;
+  box-sizing: border-box;
 
   &__filter-bar {
     display: block;
     width: 100%;
+    margin-top: 18px;
 
     // Force the filter-bar inner scroll-box to a full-width flex row so the
     // search field (addon-before slot) can stretch.
@@ -41,10 +44,32 @@
   }
 
   &__apply {
-    color: #2f6df6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: #2f6df6;
+    color: #ffffff;
     font-size: 14px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    box-shadow: 0 8px 24px rgba(47, 109, 246, 0.14);
     cursor: pointer;
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
     white-space: nowrap;
+  }
+
+  &__apply:hover {
+    transform: translateY(-1px);
+    background: #2557d4;
+    box-shadow: 0 12px 28px rgba(47, 109, 246, 0.2);
+  }
+
+  &__apply:active {
+    transform: translateY(0);
+    background: #1e48c0;
   }
 
   // The content area sits to the right of the 176px sidebar, so anything

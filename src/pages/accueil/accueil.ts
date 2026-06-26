@@ -19,10 +19,10 @@ export const GENRE = ['Open World', 'Platformer', 'RPG', 'action-aventure', "Jeu
 export type Genre = (typeof GENRE)[number];
 
 
-  export type JeuxParGenre = {
-    genre: string,
-    jeux: Jeu[],
-  }
+export type JeuxParGenre = {
+  genre: string,
+  jeux: Jeu[],
+}
 
 @Component({
   selector: 'app-accueil',
@@ -50,6 +50,7 @@ export class Accueil implements OnInit {
   );
   private readonly accueilService = inject(AccueilService);
   private readonly appliedGenre$ = new BehaviorSubject<string | null>(null);
+  private readonly search$ = new BehaviorSubject<string>('');
   protected jeux$: Observable<Jeu[]> | null = null;
   protected jeuxParGenre$: Observable<JeuxParGenre[]> | null = null;
   
@@ -66,22 +67,43 @@ export class Accueil implements OnInit {
     this.jeuxParGenre$ = combineLatest([
       this.jeux$,
       this.appliedGenre$,
+      this.search$,
     ]).pipe(
-      map(([jeux, genreSelectionne]) => {
+      map(([jeux, genreSelectionne, rechercheTexte]) => {
+        const recherche = rechercheTexte.trim().toLowerCase();
+        const jeuxFiltres = recherche
+          ? jeux.filter((jeu) => jeu.titre.toLowerCase().includes(recherche))
+          : jeux;
+
+        if (recherche) {
+          return [
+            {
+              genre: 'Résultats',
+              jeux: jeuxFiltres,
+            },
+          ];
+        }
+
         const genres = genreSelectionne
           ? [genreSelectionne]
           : this.genres;
 
-        return genres.map((genre) => ({
-          genre,
-          jeux: jeux.filter((jeu) => jeu.genre.toLowerCase() === genre.toLowerCase()),
-        }));
+        return genres
+          .map((genre) => ({
+            genre,
+            jeux: jeuxFiltres.filter((jeu) => jeu.genre.toLowerCase() === genre.toLowerCase()),
+          }))
+          .filter((item) => item.jeux.length > 0);
       })
     );
   }
 
-  protected applyFilters(): void {
-    this.appliedGenre$.next(this.selectedLabel);
+  protected applyFilters(genre: Genre): void {
+    this.appliedGenre$.next(genre);
+  }
+
+  protected onSearchChange(value: string): void {
+    this.search$.next(value);
   }
 
   protected resetFilters(): void {

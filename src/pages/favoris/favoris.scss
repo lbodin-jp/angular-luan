@@ -1,3 +1,20 @@
 :host {
   display: block;
 }
+
+.favoris {
+  padding-inline: 18px;
+}
+
+.favoris__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.favoris__empty {
+  margin-top: 24px;
+  color: #6e7480;
+  font-size: 15px;
+}

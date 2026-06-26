@@ -2,22 +2,13 @@
   <lu-filter-bar class="library__filter-bar">
     <ng-template luFilterPillAddonBefore>
       <lu-form-field label="Recherche" [hiddenLabel]="true" class="library__search">
-        <lu-text-input [hasSearchIcon]="true" [(ngModel)]="search" />
+        <lu-text-input [hasSearchIcon]="true" [(ngModel)]="search" (ngModelChange)="onSearchChange($event)" />
       </lu-form-field>
     </ng-template>
 
     <lu-filter-pill label="Genre">
-      <lu-simple-select [options]="genres" [(ngModel)]="selectedLabel" />
+      <lu-simple-select [options]="genres" [(ngModel)]="selectedLabel" (ngModelChange)="applyFilters($event)" />
     </lu-filter-pill>
-
-    <ng-template luFilterPillAddonAfter>
-      <button type="button" class="library__reset" (click)="resetFilters()">Retour au menu de base</button>
-      <button type="button" class="library__apply" (click)="applyFilters()">Apply filters</button>
-    </ng-template>
-
-    <ng-template luFilterPillAddonAfter>
-      <button type="button" class="library__apply" (click)="applyFilters()">Apply filters</button>
-    </ng-template>
   </lu-filter-bar>
 
   <div class="library__carousels">

@@ -1,3 +1,20 @@
 :host {
   display: block;
 }
+
+.recent {
+  padding-inline: 18px;
+}
+
+.recent__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.recent__empty {
+  margin-top: 24px;
+  color: #6e7480;
+  font-size: 15px;
+}

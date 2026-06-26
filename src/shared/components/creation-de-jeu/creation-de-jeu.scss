@@ -1,0 +1,139 @@
+// :host {
+//   display: block;
+//   font-family: 'Helvetica Neue', Arial, sans-serif;
+
+//   // Variables de style
+//   $color-bg-main: #e8eef7;
+//   $color-bg-input: #ffffff;
+//   $color-text-dark: #000000;
+//   $color-text-muted: #666666;
+//   $color-border: #b0b0b0;
+//   $color-link: #0066cc;
+//   $radius-main: 12px;
+//   $radius-input: 4px;
+
+//   ::ng-deep {
+//     .modal-container {
+//       width: 100%;
+//       max-width: 640px;
+//       border: 1px solid $color-border;
+//       border-radius: $radius-main;
+//       overflow: hidden;
+//       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+//       background-color: $color-bg-main;
+
+//       .modal-header {
+//         background-color: $color-bg-input;
+//         padding: 16px 20px;
+//         border-bottom: 1px solid $color-border;
+
+//         h2 {
+//           margin: 0;
+//           font-size: 1.4rem;
+//           font-weight: 800;
+//           color: $color-text-dark;
+//         }
+//       }
+
+//       lu-dialog-content, 
+//       form {
+//         background-color: $color-bg-main;
+//         padding: 24px 20px;
+//         display: flex;
+//         flex-direction: column;
+//         gap: 20px;
+//       }
+
+//       lu-form-field {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 6px;
+
+//         .lu-form-field-label, 
+//         label {
+//           font-size: 1.2rem !important;
+//           font-weight: 800 !important;
+//           color: $color-text-dark !important;
+//           text-transform: lowercase !important;
+//         }
+
+//         // ====== LA CORRECTION DÉFINITIVE AVEC TA CLASSE ======
+//         .no-lucca-style {
+//           display: block;
+//           width: 100%;
+
+//           // 1. On détruit les bordures sur le composant parent
+//           border: none !important;
+//           box-shadow: none !important;
+//           outline: none !important;
+
+//           // 2. On tue les pseudo-éléments (responsables des bordures fantômes !)
+//           &::before, &::after,
+//           *::before, *::after {
+//             display: none !important;
+//             content: none !important;
+//             border: none !important;
+//             box-shadow: none !important;
+//           }
+
+//           // 3. On tue TOUTES les bordures d'erreur/requises sur les sous-éléments Lucca
+//           div, span, .lu-input-wrapper, .lu-input, .is-invalid, .is-required, .mod-error {
+//             border: none !important;
+//             box-shadow: none !important;
+//             outline: none !important;
+//           }
+
+//           // 4. On stylise UNIQUEMENT la vraie balise <input> tout au fond
+//           input {
+//             width: 100% !important;
+//             height: 40px !important;
+//             background-color: #ffffff !important;
+//             padding: 0 12px !important;
+//             box-sizing: border-box !important;
+//             font-size: 1rem !important;
+//             color: #000000 !important;
+
+//             // La bordure grise de base propre
+//             border: 1px solid $color-border !important;
+//             border-radius: $radius-input !important;
+            
+//             // On s'assure qu'il n'y a pas d'effets natifs du navigateur
+//             box-shadow: none !important;
+//             outline: none !important;
+
+//             // Le focus bleu sans doublons
+//             &:focus, &:focus-visible, &:active {
+//               border: 1px solid $color-link !important;
+//               box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15) !important;
+//               outline: none !important;
+//             }
+//           }
+//         }
+//       }
+
+//       lu-dialog-footer {
+//         display: flex;
+//         padding: 16px 20px;
+//         background-color: $color-bg-main;
+        
+//         button {
+//           background-color: #e0e0e0;
+//           color: #a0a0a0;
+//           border: 1px solid $color-border;
+//           padding: 10px 24px;
+//           border-radius: 4px;
+//           font-weight: bold;
+//           font-size: 1rem;
+//           cursor: not-allowed;
+//           text-transform: lowercase;
+
+//           &:not([disabled]) {
+//             background-color: $color-text-dark;
+//             color: $color-bg-input;
+//             cursor: pointer;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

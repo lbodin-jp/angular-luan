@@ -1,1 +1,15 @@
 <lu-page-header label="Favoris"></lu-page-header>
+
+<div class="favoris">
+  @if (favorisJeux$ | async; as favorisJeux) {
+    @if (favorisJeux.length > 0) {
+      <div class="favoris__grid">
+        @for (jeu of favorisJeux; track jeu.id) {
+          <app-carte-jeu [jeu]="jeu" />
+        }
+      </div>
+    } @else {
+      <p class="favoris__empty">Aucun jeu favori pour le moment.</p>
+    }
+  }
+</div>

@@ -1,0 +1,40 @@
+ 
+  <lu-dialog>
+    <lu-dialog-header>
+    <h2>Ajouter un jeu</h2>
+    </lu-dialog-header>
+      <lu-dialog-content>
+        <form luForm [formGroup]="formCreation" novalidate>
+        
+        <lu-form-field label="nom">
+          <lu-text-input  [formControl]="formCreation.controls.titre" required>
+          </lu-text-input>
+        </lu-form-field>
+
+        <lu-form-field label="plateforme">
+          <lu-text-input  [formControl]="formCreation.controls.plateforme" required>
+          </lu-text-input>
+        </lu-form-field>
+
+        <lu-form-field label="note">
+          <lu-number-format-input [min]="0" [max]="20" formatStyle = "decimal"  [formControl]="formCreation.controls.note" required>
+          </lu-number-format-input>
+        </lu-form-field>
+
+        <lu-form-field label="genre">
+          <lu-simple-select [options]="genres" [formControl]="formCreation.controls.genre"/>
+        </lu-form-field>
+
+        <lu-form-field label="image">
+          <lu-text-input  [formControl]="formCreation.controls.image" required>
+          </lu-text-input>
+        </lu-form-field>
+      </form>
+    </lu-dialog-content>
+
+    <lu-dialog-footer>
+        <div class="footer-actions">
+            <button luButton [disabled]="formCreation.invalid" (click)="CreeJeu()" [state]="uiState$">créer</button>
+        </div>
+    </lu-dialog-footer>
+  </lu-dialog>

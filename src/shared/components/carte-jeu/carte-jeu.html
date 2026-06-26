@@ -2,5 +2,11 @@
 <div class="card mod-action">
     <div class="card-content">
         <img [src]="jeu().img" [alt]="jeu().titre" />
+        <button type="button"
+                class="card__favorite"
+                [class.card__favorite--active]="jeu().favoris"
+                (click)="toggleFavori()"
+                aria-label="Ajouter aux favoris">
+        </button>
     </div>
 </div>
